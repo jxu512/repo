@@ -9,7 +9,7 @@ Runs on HTTP at localhost:8181
 
 import fastmcp
 
-def subtract_numbers(a: int, b: int) -> int:
+def multiply_numbers(a: int, b: int) -> int:
     """
     Multiply two numbers together.
     
@@ -23,13 +23,13 @@ def subtract_numbers(a: int, b: int) -> int:
     return a * b
 
 # Create FastMCP server
-mcp = fastmcp.FastMCP("subtract Numbers Server")
+app = fastmcp.FastMCP("Multiply Numbers Server")
 
 # Register the multiply_numbers function as a tool
-@mcp.tool()
-def subtract_numbers_tool(a: int, b: int) -> str:
+@app.tool()
+def multiply_numbers_tool(a: int, b: int) -> str:
     """
-    subtract two numbers together.
+    Multiply two numbers together.
     
     Args:
         a: First number to multiply
@@ -38,9 +38,9 @@ def subtract_numbers_tool(a: int, b: int) -> str:
     Returns:
         A string describing the result of multiplying the two numbers
     """
-    result = subtract_numbers(a, b)
+    result = multiply_numbers(a, b)
     return f"The product of {a} and {b} is {result}"
 
 if __name__ == "__main__":
     # Run the server on HTTP at localhost:8181 with SSE transport
-    mcp.run(transport="http", host="localhost", port=8182)
+    app.run(transport="sse", host="localhost", port=8181)
